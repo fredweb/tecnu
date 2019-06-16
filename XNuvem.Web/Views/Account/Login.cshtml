@@ -1,0 +1,135 @@
+﻿@model XNuvem.Web.Models.LoginViewModel
+@using XNuvem.UI.Messages;
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 
+        Autor: George Santos  
+        Copyright (c) 2016
+    -->
+    <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="~/favicon.png" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Business Suite | Log in</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/plugins/iCheck/square/blue.css">
+    <!--[if lt IE 9]>
+        <script src="@Url.Content("~/Script/html5shiv.min.js")"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-box-body">
+            <div class="login-logo">
+                <span><b>Business</b> Suite</span>
+            </div>
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" })) { 
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <span class="text-danger">@ViewBag.ErroMessage</span>
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.TextBoxFor(m => m.UserName, new { @class="form-control", placeholder="Nome do usuário" })
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.PasswordFor(m => m.Password, new { @class="form-control", placeholder="Senha" })
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                @Html.CheckBoxFor(m => m.RememberMe) Mentenha-me conectado
+                            </label>
+                        </div>
+                    </div><!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+                    </div><!-- /.col -->
+                </div>
+            }
+        </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+    @Scripts.Render("~/bundles/jquery")
+
+    <script src="~/Scripts/cldr.js"></script>
+    <script src="~/Scripts/cldr/event.js"></script>
+    <script src="~/Scripts/cldr/supplemental.js"></script>
+    <script src="~/Scripts/cldr/unresolved.js"></script>
+
+    <script src="~/Scripts/jquery.validate.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/globalize.js" type="text/javascript"></script>
+    <script src="~/Scripts/globalize/message.js"></script>
+    <script src="~/Scripts/globalize/number.js"></script>
+
+    <script src="~/Scripts/globalize/date.js"></script>
+    <script src="~/Scripts/globalize/currency.js"></script>
+    <script src="~/Scripts/globalize/relative-time.js"></script>
+
+
+    <script src="~/Scripts/jquery.validate.globalize.js" type="text/javascript"></script>
+
+    <script>
+        jQuery.ajaxSetup({ async: false });
+        // # Globalization initialization
+        // Use $.getJSON instead of $.get if your server is not configured to return the
+        // right MIME type for .json files.
+        $.when(
+            $.get('@Url.Content("~/Scripts/cldr/main/pt/numbers.json")'),
+            $.get('@Url.Content("~/Scripts/cldr/main/pt/currencies.json")'),
+            $.get('@Url.Content("~/Scripts/cldr/main/pt/ca-gregorian.json")'),
+            $.get('@Url.Content("~/Scripts/cldr/main/pt/dateFields.json")'),
+            $.get('@Url.Content("~/Scripts/cldr/supplemental/likelySubtags.json")'),
+            $.get('@Url.Content("~/Scripts/cldr/supplemental/currencyData.json")')
+            ).then(function () {
+                // Normalize $.get results, we only need the JSON, not the request statuses.
+                return [].slice.apply(arguments, [0]).map(function (result) {
+                    return result[0];
+                });
+            }).then(Globalize.load).then(function () {
+                // Set default locale
+                Globalize.locale('pt');
+            });
+        jQuery.ajaxSetup({ async: true });
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    <!-- AdminLTE App -->
+    @Scripts.Render("~/bundles/adminlte")
+    @Styles.Render("~/css/app")
+    <!-- iCheck -->
+    <script src="~/Content/plugins/iCheck/icheck.min.js"></script>
+    <script src="~/Scripts/jquery.backstretch.js"></script>
+    <script>
+    $.backstretch([
+      '@Url.Content("~/Content/img/login-bg1.jpg")',
+      '@Url.Content("~/Content/img/login-bg2.jpg")',
+      '@Url.Content("~/Content/img/login-bg3.jpg")',
+      '@Url.Content("~/Content/img/login-bg4.jpg")'
+    ], {
+        fade: 750,
+        duration: 4000
+    });
+
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%'
+        });
+    });
+    </script>
+</body>
+</html>
+

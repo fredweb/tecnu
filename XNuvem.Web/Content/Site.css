@@ -1,0 +1,227 @@
+﻿/* ************************************************************************************************
+ *
+ *  Autor: Marvin Martins Mendes
+ *  Início alteraçõs do bootstrap
+ *
+***************************************************************************************************/
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Helvetica Neue",Helvetica,Verdana,Arial,sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* H1 - H6 font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: Verdana,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.content-wrapper {
+    padding: 0.1px; /* avoid collapse margin  */
+}
+
+.login-page,
+.register-page {
+  background: #fff;
+}
+
+.login-box, .register-box {
+    margin: 12% 60%;
+    width: 430px;
+
+    left: -webkit-calc( 50% - 250px );
+    border-radius: 5px;
+    -moz-box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
+    border: 4px solid rgba(255, 255, 255, 0.5);
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    transition: box-shadow .3s ease;
+}
+
+.login-logo {
+    color: #3c8dbc;
+    text-shadow: 1px 3px 2px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1080px) {
+    .login-box,
+    .register-box {
+        width: 400px;
+        margin: 12% auto;
+    }
+}
+
+@media (max-width: 768px) {
+  .login-box,
+  .register-box {
+    width: 90%;
+    margin-top: 40px;
+  }
+
+  .modal-dialog {
+        margin: 0 auto !important;
+        width: 95%;
+    }
+}
+
+.single-wrapper .content-wrapper{
+    background-color: #FFF;
+    margin: 0 auto;
+    width: 960px;
+    min-height: 500px;
+}
+
+@media (max-width: 968px) {
+    .single-wrapper .content-wrapper {
+        width: auto;
+        min-height:initial;
+    }
+}
+
+.single-wrapper .main-footer {
+    margin-left: 0;
+}
+
+.float-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999;
+}
+
+.float-bottom .alert {
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+
+.btn-black{
+    background-color: #111111 !important;
+    color: #fff;
+}
+
+.btn-black:hover,
+.btn-black:active,
+.btn-clack.hover {
+    background-color: rgba(0, 0, 0, 0.70) !important;
+    color: #fff !important;
+}
+
+.form-group label {
+    font-weight: inherit;
+}
+
+.form-group .select2-container {
+    display: block;
+    width: 100% !important;
+}
+
+
+.sidebar-menu * {
+    outline: 0 none !important;
+}
+
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.sidebar .user-online {
+    overflow: hidden;
+    box-shadow: initial;
+    border-radius: initial;
+    background-color: #fff;
+    padding: 8px;
+}
+
+.sidebar-collapse .sidebar .user-online .user-name {
+    display: none !important;
+}
+
+
+
+.dataTables_info {
+    white-space: inherit !important;
+}
+
+table > tbody > tr > td {
+    text-overflow: ellipsis;
+    max-width: 120px !important;
+    overflow: hidden !important;
+}
+
+.xn_toolbar {
+    margin-bottom: 20px;
+    background: #cfcfcf none repeat scroll 0 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px rgba(78, 87, 92, 0.72);
+    display: block;
+    padding-top: 10px;
+}
+
+.xn_toolbar .btn-app:hover {
+    background: #f5f5f5 none repeat scroll 0 0;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    font-size: 85%;
+}
+
+.xnuvem-message {
+    max-height: 300px;
+    overflow-y: scroll;
+    background-color: #fff;
+    color: #111111;
+}
+
+@media (max-width: 768px) {
+    .xnuvem-message {
+    max-height: 260px !important;
+}
+}
+
+.main-header .sidebar-button {
+    float: left;
+    padding: 14px;
+    background-color: #fff;
+}
+
+.main-header .sidebar-button:hover {
+    background-color: #ecf0f5;
+}
+
+.total-wrapper {
+    position: fixed;
+    width: 350px;
+    margin: 15px auto;
+    top: 0px;
+    z-index: 1049;
+}
+
+.modal-xn-content {
+    max-height: 300px;
+    overflow-y: scroll;
+    background-color: #fff;
+    color: #111;
+    padding: 5px;
+}
+
+.form-group .field-validation-error {
+    color: #dd4b39;
+}

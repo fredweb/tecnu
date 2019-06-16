@@ -1,0 +1,12 @@
+﻿@using XNuvem.UI.Messages;
+@model IEnumerable<MessageEntry>
+
+<p>FROM MODEL</p>
+<ul>
+    @if (Model != null) {
+        foreach (var item in Model) {
+            <li>@item.Type - @item.Message</li>
+        }
+    }
+</ul>
+

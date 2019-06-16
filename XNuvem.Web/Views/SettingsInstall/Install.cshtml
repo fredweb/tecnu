@@ -1,0 +1,73 @@
+﻿@model XNuvem.Web.Models.InstallViewModel
+
+@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    ViewBag.Title = " | Instalação";
+}
+
+
+<section class="content-header">
+    <h1>Instalação do Business Suite <small>Criação do banco de dados e usuário administrador</small></h1>
+</section>
+
+@using (Html.BeginForm("Install", "SettingsInstall", new { area = "" }, FormMethod.Post, new { role = "form" })) {
+    @Html.AntiForgeryToken()
+<section class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="callout callout-warning">
+                <h4><i class="icon fa fa-warning"></i>&nbsp;&nbsp;Atenção</h4>
+                <p>Esta operação irá apagar qualquer informação contida no banco de dados caso ele exista. 
+                Caso queira apenas atualizar o sistema não execute esta operação e vá para o processo de atualização.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Dados de conexão</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConnectionString)
+                        @Html.TextBoxFor(m => m.ConnectionString, new { @class = "form-control", placeholder = "Connection string" })
+                        @Html.ValidationMessageFor(m => m.ConnectionString)
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Usuário administrador</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserName)
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Nome do usuário" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "E-mail" })
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Senha" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirmar senha" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-warning" title="Continuar" data-bs-submit>Continuar</button>
+            </div>
+        </div>
+    </div>
+</section>
+}

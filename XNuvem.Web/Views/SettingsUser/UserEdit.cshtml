@@ -1,0 +1,59 @@
+﻿@model XNuvem.Web.Models.UserEditViewModel
+@using XNuvem.Mvc.Html
+@{
+    ViewBag.Title = "Usuário - configuração";
+}
+
+<section class="content-header">
+    <h1>@ViewBag.Title<small>@ViewBag.Message</small></h1>
+</section>
+
+<section class="content">
+    @using (Html.XNBeginForm("useredit", "SettingsUser", "")) {
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-sm-12 col-lg-10">
+            <div class="box">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            @Html.HiddenFor(m=>m.Id)
+                            @Html.EditorFor(m => m.UserName)
+                            @Html.EditorFor(m => m.FullName)
+                            @Html.EditorFor(m => m.Email)
+                            @Html.EditorFor(m => m.Password)
+                            @Html.EditorFor(m => m.ConfirmPassword)
+                            @Html.XNAjaxDropDownFor(m => m.SlpCode, "List", "SalesPerson", "XNuvem.Vendas", (Model != null ? Model.SlpName : ""))
+                            @Html.HiddenFor(m=>m.SlpName)
+                            <div class="form-group">
+                                <strong>Empresas</strong>
+                                <div>
+                                    @Html.CheckBoxFor(m => m.QryGroup60) OK Alimentos
+                                    @Html.CheckBoxFor(m => m.QryGroup61) X'TOSO
+                                    @Html.CheckBoxFor(m => m.QryGroup62) Sabor da Bahia
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success" title="Salvar" data-xn-save data-xn-clear="Id">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</section>
+
+
+@section Scripts {
+    <script>
+        $("#SlpCode").on("select2:select", function (e) {
+            if (!e.params || !e.params.data) return;
+            var d = e.params.data;
+            $("#SlpName").val(d.text);
+        });
+    </script>
+
+}
+

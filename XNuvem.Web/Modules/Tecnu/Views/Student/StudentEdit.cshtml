@@ -1,0 +1,78 @@
+﻿@model Tecnu.Core.ViewModel.StudentViewModel
+@using XNuvem.Mvc.Html
+@{
+    ViewBag.Title = "Alunos";
+}
+
+<section class="content-header">
+    <div class="row text-red" style="padding: 5px">
+        <div class="col-lg-6">
+            <span style="font-size: 28px">
+                @ViewBag.Title
+            </span>
+        </div>
+        <div class="col-lg-6" style="text-align: right;">
+            <ol class="breadcrumb" style="background-color: transparent;">
+                <li>
+                    <a href="#" style="color: #ac2925"><i class="fa fa-circle-thin"></i> Home</a>
+                </li>
+                <li>
+                    <a href="#" style="color: #ac2925">Aluno</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+</section>
+<br/>
+
+<section class="content">
+    @using (Html.XNBeginForm("StudentEdit", "Curso", "Tecnu"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="box box-danger">
+            <div class="box-header with-border">
+                <h3 class="box-title">Cadastrar Curso</h3>
+                <div class="box-tools pull-right">
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.EditorFor(m => m.Name)
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        @Html.EditorFor(m => m.DateBirth)
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        @Html.EditorFor(m => m.Cpf)
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        @Html.EditorFor(m => m.Telephone)
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        @Html.EditorFor(m => m.Email)
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        @Html.EditorFor(m => m.AdditionalInformation)
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-danger text-right" title="Salvar" data-xn-save data-xn-clear="Id">Salvar</button>
+            </div>
+        </div>
+    }
+</section>
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+    $(document).ready(function () {
+        $("#Cpf").inputmask("999.999.999-99");
+        $("#Telephone").inputmask("(99) 9999-9999");
+
+        $('#Name').attr('maxlength', 255);
+        $('#Email').attr('maxlength', 100);
+
+    });
+</script>

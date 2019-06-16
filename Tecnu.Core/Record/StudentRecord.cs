@@ -1,0 +1,36 @@
+﻿using System;
+using Tecnu.Core.Record.Base;
+using XNuvem.Data;
+
+namespace Tecnu.Core.Record
+{
+    public class StudentRecord : RecordBase
+    {
+        public virtual string Name { get; set; }
+
+        public virtual DateTime DateBirth { get; set; }
+
+        public virtual long Cpf { get; set; }
+        public virtual long Telephone { get; set; }
+
+        public virtual string Email { get; set; }
+        public virtual string AdditionalInformation { get; set; }
+    }
+
+    public class StudentMap : EntityMap<StudentRecord>
+    {
+        public StudentMap()
+        {
+            Table("ALUNO");
+            Id(k => k.Id).Column("ID").GeneratedBy.Increment();
+            Map(m => m.Name).Column("NNALUNO").Length(500).Not.Nullable();
+            Map(m => m.Cpf).Column("NUCPF").Not.Nullable();
+            Map(m => m.DateBirth).Column("DTNASCIMENTO").Not.Nullable();
+            Map(m => m.Email).Column("DSEMAIL").Length(100).Not.Nullable();
+            Map(m => m.Telephone).Column("NUTELEFONE").Not.Nullable();
+            Map(m => m.AdditionalInformation).Column("INFOADS").Length(4000).Not.Nullable();
+            Map(m => m.When).Column("DTCADASTRO").Not.Nullable();
+            Map(m => m.Update).Column("DTATUALIZACAO").Not.Nullable();
+        }
+    }
+}

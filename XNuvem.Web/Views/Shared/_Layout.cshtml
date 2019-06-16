@@ -1,0 +1,130 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="icon" type="image/x-icon" href="~/favicon.png" />
+    <title>Business Suite @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/ionicons-2.0.1/css/ionicons.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    <!--[if lt IE 9]>
+        <script src="@Url.Content("~/Script/html5shiv.min.js")"></script>
+    <![endif]-->
+    @RenderSection("HeaderContent", required: false)
+    <link href="~/Content/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/plugins/iCheck/square/blue.css">
+    @Styles.Render("~/css/app")
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <header class="main-header">
+            <a href="~/" class="logo">
+                <span class="logo-mini"><b>OK</b></span>
+                <span class="logo-lg"><b>OK</b> Alimentos</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Alternar Navegação</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a href="@Url.Content("~/sales/order/create")" class="btn btn-flat sidebar-button" title="Novo pedido"><i class="fa fa-plus"></i></a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                     @*   @Html.Partial("_LoginPartial") *@
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- =============================================== -->
+        <!-- Left side column. contains the sidebar -->
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <div class="user-online">
+                    <span class="label label-info" title="@User.Identity.GetUserName()"><i class="fa fa-circle text-success"></i><span class="user-name">&nbsp;&nbsp;@User.Identity.GetUserName()</span></span>
+                </div>
+               @Html.Action("Menu", "Navigation", new { area = "" })
+            </section>
+        </aside>
+        <!-- =============================================== -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div><!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Versão</b> 1.1
+            </div>
+            <strong>Copyright &copy; 2015 OK Alimentos Todos os Direitos Reservados</strong>
+        </footer>
+    </div><!-- ./wrapper -->
+    <div id="app-messages" class="float-bottom"></div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="~/Scripts/cldr.js"></script>
+    <script src="~/Scripts/cldr/event.js"></script>
+    <script src="~/Scripts/cldr/supplemental.js"></script>
+    <script src="~/Scripts/cldr/unresolved.js"></script>
+
+    <script src="~/Scripts/globalize.js" type="text/javascript"></script>
+    <script src="~/Scripts/globalize/message.js"></script>
+    <script src="~/Scripts/globalize/number.js"></script>
+
+    <script src="~/Scripts/globalize/date.js"></script>
+    <script src="~/Scripts/globalize/currency.js"></script>
+    <script src="~/Scripts/globalize/relative-time.js"></script>
+
+    <script>
+        var g_cldr = false;
+        jQuery.ajaxSetup({ async: false });
+        // # Globalization initialization
+        // Use $.getJSON instead of $.get if your server is not configured to return the
+        // right MIME type for .json files.
+        $.when(
+            $.get('@Url.Content("~/Scripts/cldr/main/pt/numbers.json")'),
+            $.get('@Url.Content("~/Scripts/cldr/main/pt/currencies.json")'),
+            $.get('@Url.Content("~/Scripts/cldr/main/pt/ca-gregorian.json")'),
+            $.get('@Url.Content("~/Scripts/cldr/main/pt/dateFields.json")'),
+            $.get('@Url.Content("~/Scripts/cldr/supplemental/likelySubtags.json")'),
+            $.get('@Url.Content("~/Scripts/cldr/supplemental/currencyData.json")')
+            ).then(function () {
+                // Normalize $.get results, we only need the JSON, not the request statuses.
+                return [].slice.apply(arguments, [0]).map(function (result) {
+                    return result[0];
+                });
+            }).then(Globalize.load).then(function () {
+                // Set default locale
+                Globalize.locale('pt');
+                g_cldr = true;
+            });
+        jQuery.ajaxSetup({ async: true });
+    </script>
+
+    <script src="~/Scripts/jquery.validate.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.globalize.js" type="text/javascript"></script>
+
+    @RenderSection("PreScripts", required: false)
+    <!-- AdminLTE App -->
+    @Scripts.Render("~/bundles/adminlte")
+    <script src="~/Content/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/plugins/datepicker/locales/bootstrap-datepicker.pt-BR.js"></script>
+    <script src="~/Content/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Content/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <script src="~/Content/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/Content/plugins/iCheck/icheck.min.js"></script>
+    <script src="~/Content/plugins/select2/select2.full.min.js"></script>
+    <script src="~/Content/plugins/select2/i18n/pt-BR.js"></script>
+    <script src="~/Scripts/xnuvem-app-1.0.0.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

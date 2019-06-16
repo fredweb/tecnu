@@ -1,0 +1,27 @@
+﻿@{
+    var listItems = new List<SelectListItem>();
+    var url = ViewData["Url"];
+    var displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    var selectedText = ViewData["SelectedText"];
+    if (selectedText != null && ViewData.TemplateInfo.FormattedModelValue != null) {
+        listItems.Add(new SelectListItem {
+            Value = ViewData.TemplateInfo.FormattedModelValue.ToString(),
+            Text = selectedText.ToString(),
+            Selected = true
+        });
+    }
+}
+
+<div class="form-group">
+    @if (ViewData.ModelMetadata.IsRequired) {
+        <strong>@Html.Label("", displayName)</strong>
+    }
+    else {
+        @Html.Label("", displayName)
+    }
+    @if (!String.IsNullOrEmpty(ViewData.ModelMetadata.Description)) {
+        @:&nbsp;&nbsp;<small class="text-info">@ViewData.ModelMetadata.Description</small>
+    }
+    @Html.DropDownList("", listItems, new Dictionary<string, object> { { "class", "form-control" }, { "data-xn-select2", "" }, { "data-ajax--url", url }, { "data-ajax--cache", "true" }, { "placeholder", displayName } })
+    @Html.ValidationMessage("")
+</div>

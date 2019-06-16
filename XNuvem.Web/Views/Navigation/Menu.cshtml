@@ -1,0 +1,124 @@
+﻿@model XNuvem.Web.Models.NavigationViewModel
+
+@using XNuvem.UI.Navigation;
+
+@{
+    // Its a child action, has no layout
+    Layout = null;
+}
+
+@helper PrintMenuList(IEnumerable<MenuEntry> menuList)
+{
+    if (menuList.Any()) {
+        foreach (var item in menuList) {
+            @PrintMenuItem(item)        
+        }
+    }
+}
+
+@helper PrintMenuItem(MenuEntry item)
+{
+    if (Model.CurrentUser != null) {        
+        if (
+            string.IsNullOrEmpty(item.Permission) || 
+            Model.CurrentUser.Claims.Where(c => c.ClaimType == "Role" && c.ClaimValue == item.Permission).Any()
+            ) { 
+    
+            switch (item.Type) {
+                case MenuType.Group:
+                    @PrintMenuGroup(item);
+                    break;
+                case MenuType.Separator:
+                    @PrintMenuSeparator(item);
+                    break;
+                case MenuType.String:
+                    if(string.IsNullOrEmpty(item.ActionName)) {
+                        @PrintMenuLabel(item);
+                    }
+                    else { 
+                        @PrintMenuString(item);
+                    }
+                    break;
+                }
+        }
+    }
+}
+
+@helper PrintMenuGroup(MenuEntry item) {
+    var liClass = string.IsNullOrEmpty(item.Father) ? "treeview" : "";
+    string faClass = "fa-folder";
+    if (item.Position.IndexOf('.') > 0) {
+        faClass = "fa-clone";
+    }
+    
+    if (item.Type == MenuType.Group) {
+    <li class='@liClass'>
+        <a href="#">
+            <i class="fa @faClass"></i>
+            <span>@item.Title</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        @if (item.Submenu.Any()) {
+            <ul class="treeview-menu">
+                @PrintMenuList(item.SubmenuOrdered)
+            </ul>
+        }
+    </li>
+    }
+}
+
+@helper PrintMenuSeparator(MenuEntry item) {
+    <li class="header">
+        @if (!string.IsNullOrEmpty(item.Icon)) {
+            <i class="fa @item.Icon"></i>
+        }
+        <span>@item.Title</span>
+        @if (item.Submenu.Any()) {
+            <ul class="treeview-menu">
+                @PrintMenuList(item.SubmenuOrdered)
+            </ul>
+        }
+    </li>
+}
+
+@helper PrintMenuString(MenuEntry item) {
+    <li>
+        <a href="@Url.Action(item.ActionName, item.ControllerName, item.RouteValues)">
+            @if (!string.IsNullOrEmpty(item.Icon)) {
+                <i class="fa @item.Icon"></i>
+            }
+            else {
+                <i class="fa fa-file"></i>
+            }
+            <span>@item.Title</span>
+        </a>
+        @if (item.Submenu.Any()) {
+            <ul class="treeview-menu">
+                @PrintMenuList(item.SubmenuOrdered)
+            </ul>
+        }
+    </li>
+}
+
+@helper PrintMenuLabel(MenuEntry item) {
+    <li>
+        <a href="#">
+            @if (!string.IsNullOrEmpty(item.Icon)) {
+                <i class="fa @item.Icon"></i>
+            }
+            else {
+                <i class="fa fa-file"></i>
+            }
+            <span>@item.Title</span>
+        </a>
+        @if (item.Submenu.Any()) {
+            <ul class="treeview-menu">
+                @PrintMenuList(item.SubmenuOrdered)
+            </ul>
+        }
+    </li>
+}
+
+<ul class="sidebar-menu">
+    @PrintMenuList(Model.Root.SubmenuOrdered)
+</ul>

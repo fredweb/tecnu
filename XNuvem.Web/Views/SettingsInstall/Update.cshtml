@@ -1,0 +1,42 @@
+﻿@model XNuvem.Web.Models.UpdateViewModel
+
+@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    ViewBag.Title = " | Atualização";
+
+    var calloutClass = Model.ReadyToUpdate ? "callout-warning" : "callout-success";
+}
+
+<section class="content-header">
+    <h1>Atualização do Business Suite <small>Atualização do banco de dados</small></h1>
+</section>
+
+@using (Html.BeginForm("Update", "SettingsInstall", new { area = "" }, FormMethod.Post, new { role = "form" })) {
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m=>m.ReadyToUpdate)
+    @Html.HiddenFor(m => m.Title)
+    @Html.HiddenFor(m=>m.Message)
+    <section class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="callout callout-warning">
+                    <h4><i class="icon fa fa-warning"></i>&nbsp;&nbsp;Atenção</h4>
+                    <p>
+                        Esta operação irá atualizar o banco de dados do sistema.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="callout @calloutClass">
+                    <h4><i class="icon fa fa-warning"></i>&nbsp;&nbsp;@Model.Title</h4>
+                    <p>@Model.Message</p>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-warning" title="Continuar">Continuar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+}

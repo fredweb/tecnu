@@ -1,0 +1,88 @@
+﻿@using XNuvem.UI.Navigation;
+
+@{
+    var menuManager = ServiceContext.Resolve<IMenuManager>();
+    var root = menuManager.GetRootMenu();
+}
+
+@helper PrintMenuList(IEnumerable<MenuEntry> menuList)
+{
+    if (menuList.Any()) {
+        //var orderedMenu = menuList.OrderBy(m => m.Order).ThenBy(m => m.Level).ToList();
+        foreach (var item in menuList) {
+            @PrintMenuItem(item)        
+        }
+    }
+}
+
+@helper PrintMenuItem(MenuEntry item)
+{
+    
+    switch (item.Type) {
+        case MenuType.Group:
+            @PrintMenuGroup(item);
+            break;
+        case MenuType.Separator:
+            @PrintMenuSeparator(item);
+            break;
+        case MenuType.String:
+            @PrintMenuString(item);
+            break;
+    }
+}
+
+@helper PrintMenuGroup(MenuEntry item) {
+    var liClass = string.IsNullOrEmpty(item.Father) ? "treeview" : "";
+    var faClass = string.IsNullOrEmpty(item.Icon) ? "fa-folder" : item.Icon;
+    if (item.Type == MenuType.Group) {
+    <li class='@liClass'>
+        <a href="#">
+            <i class="fa @faClass"></i>
+            <span>@item.Title</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        @if (item.Submenu.Any()) {
+            <ul class="treeview-menu">
+                @PrintMenuList(item.Submenu)
+            </ul>
+        }
+    </li>
+    }
+}
+
+@helper PrintMenuSeparator(MenuEntry item) {
+    <li class="header">
+        @if (!string.IsNullOrEmpty(item.Icon)) {
+            <i class="fa @item.Icon"></i>
+        }
+        <span>@item.Title</span>
+        @if (item.Submenu.Any()) {
+            <ul class="treeview-menu">
+                @PrintMenuList(item.Submenu)
+            </ul>
+        }
+    </li>
+}
+
+@helper PrintMenuString(MenuEntry item) {
+    <li>
+        <a href="@Url.Action(item.ActionName, item.ControllerName, item.RouteValues)">
+            @if (!string.IsNullOrEmpty(item.Icon)) {
+                <i class="fa @item.Icon"></i>
+            }
+            else {
+                <i class="fa fa-file"></i>
+            }
+            <span>@item.Title</span>
+        </a>
+        @if (item.Submenu.Any()) {
+            <ul class="treeview-menu">
+                @PrintMenuList(item.Submenu)
+            </ul>
+        }
+    </li>
+}
+
+<ul class="sidebar-menu">
+    @PrintMenuList(root.Submenu)
+</ul>

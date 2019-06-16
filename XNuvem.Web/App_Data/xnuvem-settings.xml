@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ConnectionSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DataConnectionString>Server=localhost,11433;Database=tecnu;User Id=sa;Password=DockerSql2017!;Connection Timeout=240</DataConnectionString>
+  <DataProvider>System.Data.SqlClient</DataProvider>
+  <CreatedAt>2019-06-16T12:03:24.1977616-03:00</CreatedAt>
+  <UpdatedAt>2019-06-16T12:03:24.1977616-03:00</UpdatedAt>
+</ConnectionSettings>

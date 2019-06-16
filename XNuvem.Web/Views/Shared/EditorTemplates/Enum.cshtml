@@ -1,0 +1,24 @@
+﻿@model Enum
+
+@{
+    var values = Enum.GetValues(ViewData.ModelMetadata.ModelType).Cast<object>()
+                     .Select(v => new SelectListItem {
+                         Selected = v.Equals(Model),
+                         Text = v.ToString(),
+                         Value = v.ToString()
+                     });                               
+}
+
+<div class="form-group">
+    @if (ViewData.ModelMetadata.IsRequired) {
+        <strong>@Html.Label("", ViewData.ModelMetadata.DisplayName)</strong>
+    }
+    else {
+        @Html.Label("", ViewData.ModelMetadata.DisplayName)
+    }
+    @if (!String.IsNullOrEmpty(ViewData.ModelMetadata.Description)) {
+        @:&nbsp;&nbsp;<small class="text-info">@ViewData.ModelMetadata.Description</small>
+    }
+    @Html.DropDownList("", values, new Dictionary<string, object> { { "class", "form-control select2" }, {"data-xn-select2", ""} })
+    @Html.ValidationMessage("")
+</div>

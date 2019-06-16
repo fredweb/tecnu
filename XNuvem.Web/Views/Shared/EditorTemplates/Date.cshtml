@@ -1,0 +1,21 @@
+﻿<div class="form-group">
+    @if (ViewData.ModelMetadata.IsRequired) {
+        <strong>@Html.Label("", ViewData.ModelMetadata.DisplayName)</strong>
+    }
+    else {
+        @Html.Label("", ViewData.ModelMetadata.DisplayName)
+    }
+    
+    @if (!String.IsNullOrEmpty(ViewData.ModelMetadata.Description)) {
+        @:&nbsp;&nbsp; <small class="text-info">@ViewData.ModelMetadata.Description</small>
+    }
+    <div class="input-group">
+        <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+        </div>
+        @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue,
+            new Dictionary<string, object> { 
+            { "class", "form-control" }, { "data-xn-date", "" }, { "placeholder", "dd/mm/aaaa" }  })
+    </div>
+        @Html.ValidationMessage("")
+    </div>

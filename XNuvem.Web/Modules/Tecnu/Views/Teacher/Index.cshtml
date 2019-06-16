@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Professor";
+}
+
+<section class="content-header">
+    <div class="row text-red" style="padding: 5px">
+        <div class="col-lg-6">
+            <span style="font-size: 28px">
+                @ViewBag.Title
+            </span>
+        </div>
+        <div class="col-lg-6" style="text-align: right;">
+            <ol class="breadcrumb" style="background-color: transparent;">
+                <li>
+                    <a href="#" style="color: #ac2925"><i class="fa fa-circle-thin"></i> Home</a>
+                </li>
+                <li>
+                    <a href="#" style="color: #ac2925">Professor</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+</section>
+<br />
+
+<section class="content">
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <h3 class="box-title">Consultar Aluno</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <table data-xn-dt
+                   data-xn-show-select="true"
+                   data-xn-key="Id"
+                   data-xn-columns="Nome,E-mail,Telefone,Data Nascimento"
+                   data-xn-orderable="Descricao"
+                   data-xn-url="@Url.Action("GetTeacher", "Teacher", new { area="Tecnu" } )"
+                   data-xn-url-add="@Url.Action("StudentEdit", "Teacher", new { area="Tecnu" } )"
+                   data-xn-url-delete="@Url.Action( "StudentDelete", "Teacher", new { area="Tecnu" } )"
+                   data-xn-link="Descricao:@Url.Action( "StudentEdit", "Teacher", new { area="Tecnu" } )/{Id}"
+                   class="table table-bordered table-hover nowrap"
+                   style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="col-lg-5">Nome</th>
+                        <th class="col-lg-3">E-mail</th>
+                        <th class="col-lg-2">Telefone</th>
+                        <th class="col-lg-2">Data Nascimento</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section HeaderContent{
+    @Styles.Render("~/css/dataTable")
+}
+
+@section PreScripts {
+    @Scripts.Render("~/js/dataTable")
+}
+

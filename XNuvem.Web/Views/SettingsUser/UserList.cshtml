@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Lista de usuários";
+}
+
+<section class="content-header">
+    <h1>@ViewBag.Title</h1>
+</section>
+
+<section class="content">
+    <div class="box">
+        <div class="box-body">
+            <table data-xn-dt
+                   data-xn-show-select="true"
+                   data-xn-key="Id"
+                   data-xn-columns="UserName,FullName,Email"
+                   data-xn-orderable="UserName,FullName"
+                   data-xn-url="@Url.Action("UserList", "SettingsUser")"
+                   data-xn-url-add="@Url.Action("UserEdit", "SettingsUser")"
+                   data-xn-url-delete="@Url.Action("UserDelete", "SettingsUser")"
+                   data-xn-link="UserName:@Url.Action("UserEdit", "SettingsUser")/{Id}"
+                   class="table table-bordered table-hover nowrap"
+                   style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Login</th>
+                        <th>Nome completo</th>
+                        <th>E-mail</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section HeaderContent {
+@Styles.Render("~/css/dataTable")
+}
+
+@section PreScripts {
+@Scripts.Render("~/js/dataTable")
+}
+

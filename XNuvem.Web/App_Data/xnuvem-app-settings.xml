@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<GeneralSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <add Key="SAPCompanyName" Value="OK ALIMENTOS" />
+  <add Key="SAPCompanyDB" Value="SBO_CAND_GER" />
+  <add Key="SAPServerName" Value="M3M-PC" />
+  <add Key="SAPUserName" Value="manager" />
+  <add Key="SAPPassword" Value="gecand2015" />
+  <add Key="SAPMinPool" Value="3" />
+  <add Key="SAPMaxPool" Value="25" />
+  <add Key="SAPConnectionString" Value="Server=localhost;Database=SBO_CAND_GER;User Id=sa;Password=sysmaker;Connection Timeout=240" />
+  <add Key="ApplicationDB" Value="BS_CANDEIAS" />
+</GeneralSettings>

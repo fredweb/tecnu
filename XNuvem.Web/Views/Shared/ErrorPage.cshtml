@@ -1,0 +1,35 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{  
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    ViewBag.Title = "| Error";
+    var statusCode = ViewContext.RequestContext.HttpContext.Response.StatusCode;
+    var errorColor = "text-red";
+    var errorMessage = "Oops! Aconteceu algum erro inesperado.";
+    switch (statusCode) {
+        case 404:
+            errorColor = "text-yellow";
+            errorMessage = "Oops! Página não encontrada.";
+            break;
+        case 500:
+            errorColor = "text-red";
+            break;
+    }
+}
+<section class="content">
+    <div class="error-page">
+        <h2 class="headline @errorColor"><img src="~/Content/img/error-page.png" alt="Erro: " /> @statusCode</h2>
+        <div class="row">
+            <div class="col-sm-12 error-content">
+                <h3><i class="fa fa-warning @errorColor"></i> @errorMessage</h3>
+                <p>
+                    Estamos tentando verificar o erro.
+                    Enquanto isso tente retornar para a <a href="~/">página principal</a>.
+                </p>
+                <p>
+                    <a href="~/" class="btn btn-info"><i class="fa fa-backward"></i> Voltar</a>
+                </p>
+            </div>
+        </div>
+    </div><!-- /.error-page -->
+</section>
